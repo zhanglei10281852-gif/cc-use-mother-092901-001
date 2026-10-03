@@ -11,6 +11,25 @@ class PermitState(StrEnum):
     SIGNED = "signed"
     SUSPENDED = "suspended"
     REVOKED = "revoked"
+    SUPERSEDED = "superseded"
+
+
+class ReviewState(StrEnum):
+    REVIEW = "review"
+    SUPPLEMENT_REQUESTED = "supplement_requested"
+    ISSUED = "issued"
+
+
+class RecognitionState(StrEnum):
+    ACTIVE = "active"
+    REVOKED = "revoked"
+    SUPERSEDED = "superseded"
+
+
+class ConflictState(StrEnum):
+    OPEN = "open"
+    RESCHEDULED = "rescheduled"
+    CANCELLED = "cancelled"
 
 
 @dataclass(frozen=True)
@@ -22,6 +41,8 @@ class RouteWindow:
     def __post_init__(self) -> None:
         if self.ends_at <= self.starts_at:
             raise ValueError("路线时窗结束时间必须晚于开始时间")
+        if self.starts_at.tzinfo is None or self.ends_at.tzinfo is None:
+            raise ValueError("路线时窗必须携带时区信息")
 
 
 @dataclass(frozen=True)
