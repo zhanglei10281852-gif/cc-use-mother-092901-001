@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "permit-coordination"
+version = "1.0.0"
+description = "跨区域智能网联汽车道路测试许可协同后端（事件溯源）"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+permit-coordination = "permit_coordination.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
